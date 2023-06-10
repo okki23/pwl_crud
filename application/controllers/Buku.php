@@ -4,7 +4,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Buku extends CI_Controller {
 
 	
-	
+	public function __construct(){
+
+		parent::__construct();
+		 
+		if(!$this->session->userdata('username')){
+			echo "<script language=javascript>
+					alert('Anda tidak berhak mengakses halaman ini!');
+					window.location='" . base_url('login') . "';
+					</script>";
+		}
+	} 
 	public function index()
 	{
 		$data['listing'] = $this->db->get('buku')->result();
